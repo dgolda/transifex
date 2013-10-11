@@ -226,10 +226,10 @@ class ResourceHandler(BaseHandler):
             msg = "Required field is missing: %s" % e
             logger.warning(msg)
             raise BadRequestError(msg)
-        if len(slug) > 50:
+        if len(slug) > 200:
             raise BadRequestError(
                 "The value for slug is too long. It should be less than "
-                "50 characters."
+                "200 characters."
             )
 
         try:
