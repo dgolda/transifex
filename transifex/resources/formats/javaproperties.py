@@ -64,7 +64,7 @@ def convert_to_ascii(c):
     n = ord(c)
     for i in xrange(4):
         (n, mod) = divmod(n, base)
-        s = ''.join([hex(mod)[2], s])
+        s = ''.join([hex(mod)[2].upper(), s])
     return ''.join(['\\u', s])
 
 
@@ -77,7 +77,8 @@ class JavaCompiler(PropertiesCompiler):
     def _visit_translation(self, translation):
         """Use unicode escape sequences to represent unicode characters."""
         for char in translation:
-            if ord(char) in range(127, 160) or ord(char) > 255:
+            #if ord(char) in range(127, 160) or ord(char) > 255:
+            if ord(char) > 127:
                 translation = translation.replace(char, convert_to_ascii(char))
         return translation
 
